@@ -11,7 +11,7 @@ public class Test
     public static void test(String description, boolean result)
     {
         if(!result) {
-            System.out.println("Test failed: " + description);
+            System.err.println("Test failed: " + description);
         }
     }
 }
