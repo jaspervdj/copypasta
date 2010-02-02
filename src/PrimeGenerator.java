@@ -12,17 +12,21 @@ class PrimeGenerator {
 	*/
 	public static ArrayList<Integer> generate(int n)
 	{
-		boolean[] sieve = new boolean[n+1];
+		BitVector sieve = new BitVector();
 		double sqrt = Math.sqrt(n);
-		for(int i = 2;i<=sqrt; i++){
+		for(int i = 4; i <= n;i +=2)
+		{
+			sieve.add(i);
+		}
+		for(int i = 3;i<=sqrt; i+=2){
 			for(int j= 2; i*j <= n;j++){
-				sieve[i*j]=true;
+				sieve.add(i*j);
 			}
 		}
 		
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		for (int i=2; i<=n; i++) {
-			if(! sieve[i]) list.add(i);
+			if(! sieve.contains(i)) list.add(i);
 		}
 		return list;
 	}
@@ -67,7 +71,7 @@ class PrimeGenerator {
 						3343, 3347, 3359, 3361, 3371, 3373, 3389, 3391, 3407, 3413, 3433, 3449, 3457,
 						3461, 3463, 3467, 3469, 3491, 3499, 3511, 3517, 3527, 3529, 3533, 3539, 3541,
 						3547, 3557, 3559, 3571};
-		 ArrayList<Integer> list = generate(3571);
+		ArrayList<Integer> list = generate(3571);
 		boolean equal = true;
 		for (int i = 0;i < primes.length ;i++ ) {
 			if(primes[i]!=list.get(i)) equal = false;
