@@ -2,6 +2,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.ArrayList;
 
+/**
+ * List tools
+ *
+ * @author nudded
+ */
 class ListConvenience {
 	
 	public static int min(Collection<Integer> e)

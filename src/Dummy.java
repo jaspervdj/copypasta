@@ -1,5 +1,7 @@
 /**
  * A dummy class as example.
+ *
+ * @author jaspervdj
  */
 public class Dummy
 {

@@ -1,9 +1,10 @@
 
 /*
-a Prime number generator, using the sieve of erasthostenos (or something)
-*/
+ * A prime number generator, using the sieve of erasthostenes
+ *
+ * @author nudded
+ */
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class PrimeGenerator {
 	

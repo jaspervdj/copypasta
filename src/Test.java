@@ -1,5 +1,7 @@
 /**
  * A class for testing.
+ *
+ * @author jaspervdj
  */
 public class Test
 {

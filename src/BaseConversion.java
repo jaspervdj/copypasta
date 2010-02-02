@@ -2,6 +2,8 @@
  * A class to do base conversions. All values in certain bases are kept in
  * arrays, where array[0] is the least significant digit and
  * array[array.length - 1] the most significant digit.
+ *
+ * @author jaspervdj
  */
 public class BaseConversion
 {
