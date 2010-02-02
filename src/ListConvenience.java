@@ -30,6 +30,32 @@ class ListConvenience {
 		return min;
 	}
 	
+	public static int max(Collection<Integer> e)
+	{
+		if(e.size() == 0){
+			return -1;
+		}
+		Iterator<Integer> it = e.iterator();
+		int max = it.next();
+		while(it.hasNext()){
+			int next = it.next();
+			if(next > max) max = next;
+		}
+		return max;
+	}
+	
+	public static int max(int[] e)
+	{
+		if (e.length == 0){
+			return -1;
+		}
+		int max = e[0];
+		for (int i = 1; i<e.length; i++) {
+			if(e[i] > max) max = e[i];
+		}
+		return max;
+	}
+	
 	public static int sum(Collection<Integer> e)
 	{
 		int sum = 0;
