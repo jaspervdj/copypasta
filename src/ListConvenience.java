@@ -4,6 +4,32 @@ import java.util.ArrayList;
 
 class ListConvenience {
 	
+	public static int min(Collection<Integer> e)
+	{
+		if(e.size() == 0){
+			return -1;
+		}
+		Iterator<Integer> it = e.iterator();
+		int min = it.next();
+		while(it.hasNext()){
+			int next = it.next();
+			if(next < min) min = next;
+		}
+		return min;
+	}
+	
+	public static int min(int[] e)
+	{
+		if (e.length == 0){
+			return -1;
+		}
+		int min = e[0];
+		for (int i = 1; i<e.length; i++) {
+			if(e[i] < min) min = e[i];
+		}
+		return min;
+	}
+	
 	public static int sum(Collection<Integer> e)
 	{
 		int sum = 0;
@@ -33,6 +59,10 @@ class ListConvenience {
 		}
 		Test.test("sum([0:9])",sum(list) == 36);
 		Test.test("sum([0:9])",sum(arr) == 36);
+		
+		Test.test("min([0:9])",min(list)== 0);
+		Test.test("min([0:9])",min(arr)== 0);
+	
 	}
 	
 }
