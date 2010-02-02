@@ -3,7 +3,6 @@
 a Prime number generator, using the sieve of erasthostenos (or something)
 */
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class PrimeGenerator {
 	

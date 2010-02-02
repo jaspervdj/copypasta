@@ -1,4 +1,5 @@
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -19,16 +20,16 @@ public class IsPrime {
         int i = (int) Math.floor(Math.sqrt(prime));
 
         while(isPrime && i > 1) {
-                int rest = prime % i;
-                if(rest == 0) isPrime = false;
-                i--;
+            int rest = prime % i;
+            if(rest == 0) isPrime = false;
+            i--;
         }
 
         return isPrime;
     }
 
-    public static final int NUM_ITERATIONS = 5;
-    public static final Random GEN = new Random();
+    public static final int NUM_ITERATIONS = 50;
+    public static final Random RGEN = new Random();
 
     /*
      * Check if a number is a prime with the Miller-Rabin test
@@ -41,18 +42,18 @@ public class IsPrime {
         boolean maybePrime = true;
         for(int i = 0; maybePrime && i < NUM_ITERATIONS; i++) {
             // pick a random number 0 < a < x
-            int a = GEN.nextInt(x - 1) + 1;
+            int a = RGEN.nextInt(x - 1) + 1;
             
             // calculate a^(x-1) (mod x) using square-and-multiply
-            int pot = 1; int k = x-1;
-            for(int j = 30; maybePrime && j >= 0; j--) {
+            long pot = 1; int k = x - 1;
+            for(int j = 31; maybePrime && j >= 0; j--) {
                 if(pot != 1 && pot != x - 1) {
                      pot = (pot*pot) % x;
                      if(pot == 1) maybePrime = false;
                 }
                 else pot = (pot*pot) % x;
 
-                if((k & (1 << j)) > 0) pot = (pot*a) % x;
+                if((k & (1 << j)) != 0) pot = (pot*a) % x;
             }
             
             if(pot != 1) maybePrime = false;
@@ -64,7 +65,7 @@ public class IsPrime {
     public static void main(String[] args)
     {
         // first 500 primes
-        int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 
+        int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
             67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149,
             151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233,
             239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317,
@@ -104,20 +105,37 @@ public class IsPrime {
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < primes.length; i++) {
-                Test.test("naiveTest("+primes[i]+")", naiveTest(primes[i]));
+            Test.test("naiveTest("+primes[i]+")", naiveTest(primes[i]));
         }
         for (int i = 1; i < primes.length; i++) {
-                Test.test("naiveTest("+(primes[i]+1)+")", !naiveTest(primes[i]+1));
+            Test.test("naiveTest("+(primes[i]+1)+")", !naiveTest(primes[i]+1));
         }
         long diff = System.currentTimeMillis() - start;
         System.out.println("naiveTest took " + diff + "ms");
 
         start = System.currentTimeMillis();
         for (int i = 0; i < primes.length; i++) {
-                Test.test("millerRabinTest("+primes[i]+")", millerRabinTest(primes[i]));
+            Test.test("millerRabinTest("+primes[i]+")", millerRabinTest(primes[i]));
         }
         for (int i = 1; i < primes.length; i++) {
-                Test.test("millerRabinTest("+(primes[i]+1)+")", !millerRabinTest(primes[i]+1));
+            Test.test("millerRabinTest("+(primes[i]+1)+")", !millerRabinTest(primes[i]+1));
+        }
+        diff = System.currentTimeMillis() - start;
+        System.out.println("millerRabinTest took " + diff + "ms");
+
+        // all primes smaller than 1 << 20
+        List<Integer> list = PrimeGenerator.generate((1 << 20) - 1);
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < list.size(); i++) {
+            Test.test("naiveTest("+list.get(i)+")", naiveTest(list.get(i)));
+        }
+        diff = System.currentTimeMillis() - start;
+        System.out.println("naiveTest took " + diff + "ms");
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < list.size(); i++) {
+            Test.test("millerRabinTest("+list.get(i)+")", millerRabinTest(list.get(i)));
         }
         diff = System.currentTimeMillis() - start;
         System.out.println("millerRabinTest took " + diff + "ms");
