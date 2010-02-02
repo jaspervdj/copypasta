@@ -11,7 +11,7 @@ default:
 	@# than this file (this file always has the timestamp
 	@# of the latest make invocation).
 	@echo "Searching and compiling out-of-date .java files..."
-	@find . \( -name '*.java' -a -newer $(SELF) \) | xargs --no-run-if-empty javac -cp $(CP)
+	@find . \( -name '*.java' -a -newer $(SELF) \) | xargs javac -cp $(CP)
 	
 	@# Update the timestamp for this file.
 	@echo "Generating new timestamp..."
