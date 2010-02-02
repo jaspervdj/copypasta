@@ -23,6 +23,18 @@ class ListConvenience {
 		return min;
 	}
 	
+	public static double min(double[] e)
+	{
+		if (e.length == 0){
+			return -1;
+		}
+		double min = e[0];
+		for (int i = 1; i<e.length; i++) {
+			if(e[i] < min) min = e[i];
+		}
+		return min;
+	}
+	
 	public static int min(int[] e)
 	{
 		if (e.length == 0){
@@ -45,6 +57,18 @@ class ListConvenience {
 		while(it.hasNext()){
 			int next = it.next();
 			if(next > max) max = next;
+		}
+		return max;
+	}
+	
+	public static double max(double[] e)
+	{
+		if (e.length == 0){
+			return -1;
+		}
+		double max = e[0];
+		for (int i = 1; i<e.length; i++) {
+			if(e[i] > max) max = e[i];
 		}
 		return max;
 	}
