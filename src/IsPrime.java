@@ -1,10 +1,10 @@
-
 import java.util.List;
 import java.util.Random;
 
 /**
  * Check if a number is a prime number
- * @author pieter
+ * 
+ * @author javache
  */
 public class IsPrime {
     
