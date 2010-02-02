@@ -72,6 +72,6 @@ class PrimeGenerator {
 		for (int i = 0;i < primes.length ;i++ ) {
 			if(primes[i]!=list.get(i)) equal = false;
 		}
-		Test.test("generate(500)",equal);
+		Test.test("generate(3571)",equal);
 	}
 }
